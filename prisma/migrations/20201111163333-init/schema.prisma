@@ -1,0 +1,37 @@
+datasource db {
+  provider = "mysql"
+  url = "***"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            Int       @default(autoincrement()) @id
+  nome          String
+  postsWritten  Post[]
+  postsReviewed Review[]
+  createdAt     DateTime  @default(now())
+}
+
+model Post {
+  id            Int       @default(autoincrement()) @id
+  titulo        String
+  conteudo      String
+  autorId       Int
+  publicado     Boolean   @default(false)
+  reviews       Review[]
+  autor         User      @relation(fields: [autorId], references: [id])
+  createdAt     DateTime  @default(now())
+}
+
+model Review {
+  id            Int      @default(autoincrement()) @id
+  postId        Int
+  post          Post     @relation(fields: [postId], references: [id])
+  reviewerId    Int
+  reviewer      User     @relation(fields: [reviewerId], references: [id])
+  aprovado      Boolean  @default(false)
+  nota          Int
+}

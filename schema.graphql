@@ -1,0 +1,43 @@
+const { gql } = require('apollo-server')
+
+const mainSchema = gql `
+
+scalar DateTime
+
+  type User {
+    id: Int!
+    nome: String!
+    postsWritten: [Post]
+    postsReviewed: [Review]
+    createdAt: DateTime
+  }
+
+  type Post {
+    id: Int!
+    titulo: String!
+    conteudo: String
+    publicado: Boolean
+    reviews: [Review]
+    autor: User
+    createdAt: DateTime
+  }
+
+  type Review {
+    id: Int!
+    post: Post
+    reviewer: User
+    aprovado: Boolean
+    nota: Int
+  }
+
+  type Query {
+    users: [User]
+    posts: [Post]
+  }
+
+  type Mutation {
+    createPost (titulo: String!, conteudo: String, autor: Int): Post
+  }
+`
+
+module.exports = mainSchema
