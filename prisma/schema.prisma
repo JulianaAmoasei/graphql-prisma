@@ -7,12 +7,15 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// ver como funciona @relation CASCADE e SET_NULL
 model User {
   id            Int       @default(autoincrement()) @id
   nome          String
+  // email         String    @unique
   postsWritten  Post[]
   postsReviewed Review[]
   createdAt     DateTime  @default(now())
+  // createdAt     DateTime!  @createdAt
 }
 
 model Post {

@@ -47,6 +47,8 @@ const prisma = new PrismaClient()
 //     await prisma.$disconnect()
 //   })
 
+
+// considerar também usar o yoga que é do Prisma
 const server = new ApolloServer({
   typeDefs: mainSchema,
   resolvers: mainResolver,
