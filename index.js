@@ -1,21 +1,19 @@
 const { ApolloServer } = require('apollo-server')
+const { PrismaClient } = require("@prisma/client")
 const mainSchema = require('./schema.graphql')
+
+const prisma = new PrismaClient()
 
 const resolvers = {
   Query: {
     users: () => {
-      return [{id: 1, nome: "nome"}]
+      return prisma.users.findMany()
     },
     posts: () => {
-      return [{id: 1, titulo: "titulo"}]
+      return prisma.posts.findMany()
     }
   }
 }
 
-new ApolloServer({ typeDefs: mainSchema, resolvers }).listen(
-  { port: 4000 },
-  () =>
-    console.log(
-      `🚀 Server ready at: http://localhost:4000`,
-    ),
-)
+new ApolloServer({ typeDefs: mainSchema, resolvers, context: { prisma } })
+  .listen({ port: 4000 }, () => console.log(`🚀 Server ready at: http://localhost:4000`,))
