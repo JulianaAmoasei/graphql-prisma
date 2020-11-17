@@ -8,7 +8,7 @@ scalar DateTime
     id: Int!
     nome: String!
     postsWritten: [Post]
-    postsReviewed: [Review]
+    # postsReviewed: [Review]
     createdAt: DateTime
   }
 
@@ -17,18 +17,18 @@ scalar DateTime
     titulo: String!
     conteudo: String
     publicado: Boolean
-    reviews: [Review]
+    # reviews: [Review]
     autor: User
     createdAt: DateTime
   }
 
-  type Review {
-    id: Int!
-    post: Post
-    reviewer: User
-    aprovado: Boolean
-    nota: Int
-  }
+  # type Review {
+  #   id: Int!
+  #   post: Post
+  #   reviewer: User
+  #   aprovado: Boolean
+  #   nota: Int
+  # }
 
   type Query {
     users: [User]
