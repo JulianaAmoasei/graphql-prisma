@@ -10,11 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@nexus/schema": "^0.18.0",
     "@prisma/cli": "^2.11.0",
     "@prisma/client": "^2.11.0",
     "apollo-server": "^2.19.0",
     "graphql": "^15.4.0",
     "mysql2": "^2.2.5",
+    "nexus-plugin-prisma": "^0.24.0",
     "nodemon": "^2.0.6",
     "sqlite3": "^5.0.0"
   }
