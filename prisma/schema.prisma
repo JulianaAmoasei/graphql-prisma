@@ -7,37 +7,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model posts {
+model Post {
   id         Int       @id @default(autoincrement())
   titulo     String
   conteudo   String
   autorId    Int
   publicado  Boolean?
   created_at DateTime? @default(now())
-  autor      users      @relation(fields: [autorId], references: [id])
+  users      User      @relation(fields: [autorId], references: [id])
 
   @@index([autorId], name: "autorId")
-  @@map(name: "Post")
+  @@map(name: "posts")
 }
 
-model users {
+model User {
   id         Int       @id @default(autoincrement())
   nome       String
   email      String
   created_at DateTime? @default(now())
-  posts      posts[]
-
-  @@map(name: "User")
-}
-
-model reviews {
-  id            Int      @default(autoincrement()) @id
-  postId        Int
-  post          posts     @relation(fields: [postId], references: [id])
-  reviewerId    Int
-  reviewer      users     @relation(fields: [reviewerId], references: [id])
-  aprovado      Boolean  @default(false)
-  nota          Int
-
-    @@map(name: "Review")
+  posts      Post[]
+  @@map(name: "users")
 }
