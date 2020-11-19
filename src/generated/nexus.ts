@@ -19,11 +19,109 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  PostCreateInput: { // input type
+    autor: NexusGenInputs['UserCreateOneWithoutPostsInput']; // UserCreateOneWithoutPostsInput!
+    conteudo: string; // String!
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    publicado?: boolean | null; // Boolean
+    Review?: NexusGenInputs['ReviewCreateManyWithoutPostInput'] | null; // ReviewCreateManyWithoutPostInput
+    titulo: string; // String!
+  }
+  PostCreateManyWithoutAutorInput: { // input type
+    connect?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['PostCreateOrConnectWithoutautorInput'][] | null; // [PostCreateOrConnectWithoutautorInput!]
+    create?: NexusGenInputs['PostCreateWithoutAutorInput'][] | null; // [PostCreateWithoutAutorInput!]
+  }
+  PostCreateOneWithoutReviewInput: { // input type
+    connect?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['PostCreateOrConnectWithoutReviewInput'] | null; // PostCreateOrConnectWithoutReviewInput
+    create?: NexusGenInputs['PostCreateWithoutReviewInput'] | null; // PostCreateWithoutReviewInput
+  }
+  PostCreateOrConnectWithoutReviewInput: { // input type
+    create: NexusGenInputs['PostCreateWithoutReviewInput']; // PostCreateWithoutReviewInput!
+    where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+  }
+  PostCreateOrConnectWithoutautorInput: { // input type
+    create: NexusGenInputs['PostCreateWithoutAutorInput']; // PostCreateWithoutAutorInput!
+    where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+  }
+  PostCreateWithoutAutorInput: { // input type
+    conteudo: string; // String!
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    publicado?: boolean | null; // Boolean
+    Review?: NexusGenInputs['ReviewCreateManyWithoutPostInput'] | null; // ReviewCreateManyWithoutPostInput
+    titulo: string; // String!
+  }
+  PostCreateWithoutReviewInput: { // input type
+    autor: NexusGenInputs['UserCreateOneWithoutPostsInput']; // UserCreateOneWithoutPostsInput!
+    conteudo: string; // String!
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    publicado?: boolean | null; // Boolean
+    titulo: string; // String!
+  }
   PostWhereUniqueInput: { // input type
     id?: number | null; // Int
   }
+  ReviewCreateManyWithoutPostInput: { // input type
+    connect?: NexusGenInputs['ReviewWhereUniqueInput'][] | null; // [ReviewWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['ReviewCreateOrConnectWithoutpostInput'][] | null; // [ReviewCreateOrConnectWithoutpostInput!]
+    create?: NexusGenInputs['ReviewCreateWithoutPostInput'][] | null; // [ReviewCreateWithoutPostInput!]
+  }
+  ReviewCreateManyWithoutReviewerInput: { // input type
+    connect?: NexusGenInputs['ReviewWhereUniqueInput'][] | null; // [ReviewWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['ReviewCreateOrConnectWithoutreviewerInput'][] | null; // [ReviewCreateOrConnectWithoutreviewerInput!]
+    create?: NexusGenInputs['ReviewCreateWithoutReviewerInput'][] | null; // [ReviewCreateWithoutReviewerInput!]
+  }
+  ReviewCreateOrConnectWithoutpostInput: { // input type
+    create: NexusGenInputs['ReviewCreateWithoutPostInput']; // ReviewCreateWithoutPostInput!
+    where: NexusGenInputs['ReviewWhereUniqueInput']; // ReviewWhereUniqueInput!
+  }
+  ReviewCreateOrConnectWithoutreviewerInput: { // input type
+    create: NexusGenInputs['ReviewCreateWithoutReviewerInput']; // ReviewCreateWithoutReviewerInput!
+    where: NexusGenInputs['ReviewWhereUniqueInput']; // ReviewWhereUniqueInput!
+  }
+  ReviewCreateWithoutPostInput: { // input type
+    aprovado?: boolean | null; // Boolean
+    nota: number; // Int!
+    reviewer: NexusGenInputs['UserCreateOneWithoutReviewInput']; // UserCreateOneWithoutReviewInput!
+  }
+  ReviewCreateWithoutReviewerInput: { // input type
+    aprovado?: boolean | null; // Boolean
+    nota: number; // Int!
+    post: NexusGenInputs['PostCreateOneWithoutReviewInput']; // PostCreateOneWithoutReviewInput!
+  }
   ReviewWhereUniqueInput: { // input type
     id?: number | null; // Int
+  }
+  UserCreateOneWithoutPostsInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['UserCreateOrConnectWithoutpostsInput'] | null; // UserCreateOrConnectWithoutpostsInput
+    create?: NexusGenInputs['UserCreateWithoutPostsInput'] | null; // UserCreateWithoutPostsInput
+  }
+  UserCreateOneWithoutReviewInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['UserCreateOrConnectWithoutReviewInput'] | null; // UserCreateOrConnectWithoutReviewInput
+    create?: NexusGenInputs['UserCreateWithoutReviewInput'] | null; // UserCreateWithoutReviewInput
+  }
+  UserCreateOrConnectWithoutReviewInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutReviewInput']; // UserCreateWithoutReviewInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserCreateOrConnectWithoutpostsInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutPostsInput']; // UserCreateWithoutPostsInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserCreateWithoutPostsInput: { // input type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    email: string; // String!
+    nome: string; // String!
+    Review?: NexusGenInputs['ReviewCreateManyWithoutReviewerInput'] | null; // ReviewCreateManyWithoutReviewerInput
+  }
+  UserCreateWithoutReviewInput: { // input type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    email: string; // String!
+    nome: string; // String!
+    posts?: NexusGenInputs['PostCreateManyWithoutAutorInput'] | null; // PostCreateManyWithoutAutorInput
   }
   UserWhereUniqueInput: { // input type
     id?: number | null; // Int
@@ -43,6 +141,7 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenRootTypes {
+  Mutation: {};
   Post: { // root type
     conteudo: string; // String!
     created_at?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -65,8 +164,27 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  PostCreateInput: NexusGenInputs['PostCreateInput'];
+  PostCreateManyWithoutAutorInput: NexusGenInputs['PostCreateManyWithoutAutorInput'];
+  PostCreateOneWithoutReviewInput: NexusGenInputs['PostCreateOneWithoutReviewInput'];
+  PostCreateOrConnectWithoutReviewInput: NexusGenInputs['PostCreateOrConnectWithoutReviewInput'];
+  PostCreateOrConnectWithoutautorInput: NexusGenInputs['PostCreateOrConnectWithoutautorInput'];
+  PostCreateWithoutAutorInput: NexusGenInputs['PostCreateWithoutAutorInput'];
+  PostCreateWithoutReviewInput: NexusGenInputs['PostCreateWithoutReviewInput'];
   PostWhereUniqueInput: NexusGenInputs['PostWhereUniqueInput'];
+  ReviewCreateManyWithoutPostInput: NexusGenInputs['ReviewCreateManyWithoutPostInput'];
+  ReviewCreateManyWithoutReviewerInput: NexusGenInputs['ReviewCreateManyWithoutReviewerInput'];
+  ReviewCreateOrConnectWithoutpostInput: NexusGenInputs['ReviewCreateOrConnectWithoutpostInput'];
+  ReviewCreateOrConnectWithoutreviewerInput: NexusGenInputs['ReviewCreateOrConnectWithoutreviewerInput'];
+  ReviewCreateWithoutPostInput: NexusGenInputs['ReviewCreateWithoutPostInput'];
+  ReviewCreateWithoutReviewerInput: NexusGenInputs['ReviewCreateWithoutReviewerInput'];
   ReviewWhereUniqueInput: NexusGenInputs['ReviewWhereUniqueInput'];
+  UserCreateOneWithoutPostsInput: NexusGenInputs['UserCreateOneWithoutPostsInput'];
+  UserCreateOneWithoutReviewInput: NexusGenInputs['UserCreateOneWithoutReviewInput'];
+  UserCreateOrConnectWithoutReviewInput: NexusGenInputs['UserCreateOrConnectWithoutReviewInput'];
+  UserCreateOrConnectWithoutpostsInput: NexusGenInputs['UserCreateOrConnectWithoutpostsInput'];
+  UserCreateWithoutPostsInput: NexusGenInputs['UserCreateWithoutPostsInput'];
+  UserCreateWithoutReviewInput: NexusGenInputs['UserCreateWithoutReviewInput'];
   UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
   String: NexusGenScalars['String'];
   Int: NexusGenScalars['Int'];
@@ -77,6 +195,9 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
+  Mutation: { // field return type
+    createOnePost: NexusGenRootTypes['Post']; // Post!
+  }
   Post: { // field return type
     autor: NexusGenRootTypes['User']; // User!
     conteudo: string; // String!
@@ -86,6 +207,8 @@ export interface NexusGenFieldTypes {
     titulo: string; // String!
   }
   Query: { // field return type
+    autoresPublicados: Array<NexusGenRootTypes['User'] | null> | null; // [User]
+    postsAprovados: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
     reviews: NexusGenRootTypes['Review'][]; // [Review!]!
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][]; // [User!]!
@@ -107,6 +230,9 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  Mutation: { // field return type name
+    createOnePost: 'Post'
+  }
   Post: { // field return type name
     autor: 'User'
     conteudo: 'String'
@@ -116,6 +242,8 @@ export interface NexusGenFieldTypeNames {
     titulo: 'String'
   }
   Query: { // field return type name
+    autoresPublicados: 'User'
+    postsAprovados: 'Post'
     reviews: 'Review'
     user: 'User'
     users: 'User'
@@ -137,6 +265,11 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    createOnePost: { // args
+      data: NexusGenInputs['PostCreateInput']; // PostCreateInput!
+    }
+  }
   Query: {
     reviews: { // args
       after?: NexusGenInputs['ReviewWhereUniqueInput'] | null; // ReviewWhereUniqueInput
@@ -169,9 +302,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Post" | "Query" | "Review" | "User";
+export type NexusGenObjectNames = "Mutation" | "Post" | "Query" | "Review" | "User";
 
-export type NexusGenInputNames = "PostWhereUniqueInput" | "ReviewWhereUniqueInput" | "UserWhereUniqueInput";
+export type NexusGenInputNames = "PostCreateInput" | "PostCreateManyWithoutAutorInput" | "PostCreateOneWithoutReviewInput" | "PostCreateOrConnectWithoutReviewInput" | "PostCreateOrConnectWithoutautorInput" | "PostCreateWithoutAutorInput" | "PostCreateWithoutReviewInput" | "PostWhereUniqueInput" | "ReviewCreateManyWithoutPostInput" | "ReviewCreateManyWithoutReviewerInput" | "ReviewCreateOrConnectWithoutpostInput" | "ReviewCreateOrConnectWithoutreviewerInput" | "ReviewCreateWithoutPostInput" | "ReviewCreateWithoutReviewerInput" | "ReviewWhereUniqueInput" | "UserCreateOneWithoutPostsInput" | "UserCreateOneWithoutReviewInput" | "UserCreateOrConnectWithoutReviewInput" | "UserCreateOrConnectWithoutpostsInput" | "UserCreateWithoutPostsInput" | "UserCreateWithoutReviewInput" | "UserWhereUniqueInput";
 
 export type NexusGenEnumNames = never;
 
@@ -182,7 +315,7 @@ export type NexusGenScalarNames = "Boolean" | "DateTime" | "Float" | "ID" | "Int
 export type NexusGenUnionNames = never;
 
 export interface NexusGenTypes {
-  context: Context.Context;
+  context: {};
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   argTypes: NexusGenArgTypes;
