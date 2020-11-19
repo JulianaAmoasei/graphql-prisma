@@ -16,4 +16,4 @@ const resolvers = {
 }
 
 const server = new ApolloServer({ typeDefs, resolvers })
-server.listen({ port: 4000 }, (port) => console.log(`Servidor pronto em localhost:4000`))
+server.listen({ port: 4000 }, () => console.log(`Servidor pronto em localhost:4000`))
