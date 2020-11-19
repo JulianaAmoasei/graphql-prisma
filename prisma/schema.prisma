@@ -14,7 +14,7 @@ model Post {
   autorId    Int
   publicado  Boolean?
   created_at DateTime? @default(now())
-  users      User      @relation(fields: [autorId], references: [id])
+  autor      User      @relation(fields: [autorId], references: [id])
 
   @@index([autorId], name: "autorId")
   @@map(name: "posts")
