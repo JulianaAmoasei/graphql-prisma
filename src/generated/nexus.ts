@@ -22,6 +22,12 @@ export interface NexusGenInputs {
   PostWhereUniqueInput: { // input type
     id?: number | null; // Int
   }
+  ReviewWhereUniqueInput: { // input type
+    id?: number | null; // Int
+  }
+  UserWhereUniqueInput: { // input type
+    id?: number | null; // Int
+  }
 }
 
 export interface NexusGenEnums {
@@ -60,6 +66,8 @@ export interface NexusGenRootTypes {
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
   PostWhereUniqueInput: NexusGenInputs['PostWhereUniqueInput'];
+  ReviewWhereUniqueInput: NexusGenInputs['ReviewWhereUniqueInput'];
+  UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
   String: NexusGenScalars['String'];
   Int: NexusGenScalars['Int'];
   Float: NexusGenScalars['Float'];
@@ -78,7 +86,9 @@ export interface NexusGenFieldTypes {
     titulo: string; // String!
   }
   Query: { // field return type
-    users: Array<NexusGenRootTypes['User'] | null> | null; // [User]
+    reviews: NexusGenRootTypes['Review'][]; // [Review!]!
+    user: NexusGenRootTypes['User'] | null; // User
+    users: NexusGenRootTypes['User'][]; // [User!]!
   }
   Review: { // field return type
     aprovado: boolean; // Boolean!
@@ -106,6 +116,8 @@ export interface NexusGenFieldTypeNames {
     titulo: 'String'
   }
   Query: { // field return type name
+    reviews: 'Review'
+    user: 'User'
     users: 'User'
   }
   Review: { // field return type name
@@ -125,6 +137,23 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Query: {
+    reviews: { // args
+      after?: NexusGenInputs['ReviewWhereUniqueInput'] | null; // ReviewWhereUniqueInput
+      before?: NexusGenInputs['ReviewWhereUniqueInput'] | null; // ReviewWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    user: { // args
+      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+    }
+    users: { // args
+      after?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+      before?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+  }
   User: {
     posts: { // args
       after?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
@@ -142,7 +171,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Post" | "Query" | "Review" | "User";
 
-export type NexusGenInputNames = "PostWhereUniqueInput";
+export type NexusGenInputNames = "PostWhereUniqueInput" | "ReviewWhereUniqueInput" | "UserWhereUniqueInput";
 
 export type NexusGenEnumNames = never;
 

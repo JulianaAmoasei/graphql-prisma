@@ -38,12 +38,15 @@ const Review = objectType({
   const Query = queryType({
     name: "Query",
     definition(t) {
-      t.list.field("users", {
-        type: "User",
-        resolve: (_, __, context) => {
-          return context.prisma.user.findMany()
-        }
-      })
+      t.crud.users()
+      t.crud.user()
+      t.crud.reviews()
+      // t.list.field("users", {
+      //   type: "User",
+      //   resolve: (_, __, context) => {
+      //     return context.prisma.user.findMany()
+      //   }
+      // })
     }
   })
 
