@@ -51,8 +51,8 @@ const Review = objectType({
     types: [Query, Post, User, Review],
     plugins: [nexusPrisma({ experimentalCRUD: true })],
     outputs: {
-      schema: __dirname + '/schema.graphql',
-      typegen: __dirname + '/generated/nexus.ts',
+      schema: __dirname + '/../src/schema.graphql',
+      typegen: __dirname + '/../src/generated/nexus.ts',
     },
     typegenAutoConfig: {
       contextType: 'Context.Context',
@@ -62,7 +62,7 @@ const Review = objectType({
           alias: 'prisma',
         },
         {
-          source: require.resolve('./context'),
+          source: require.resolve('../src/context'),
           alias: 'Context',
         },
       ],
