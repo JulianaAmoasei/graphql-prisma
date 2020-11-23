@@ -1,22 +1,18 @@
 {
   "name": "prisma",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "API GraphQL com Prisma/Nexus e MySQL",
+  "main": "src/index.js",
   "scripts": {
     "start": "nodemon ./src/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Alura",
   "license": "ISC",
   "dependencies": {
-    "@nexus/schema": "^0.18.0",
-    "@prisma/cli": "^2.11.0",
-    "@prisma/client": "^2.11.0",
     "apollo-server": "^2.19.0",
     "graphql": "^15.4.0",
     "mysql2": "^2.2.5",
-    "nexus-plugin-prisma": "^0.24.0",
     "nodemon": "^2.0.6"
   }
 }
