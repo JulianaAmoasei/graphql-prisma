@@ -12,7 +12,7 @@ model Post {
   titulo    String
   conteudo  String
   autorId   Int
-  publicado Boolean
+  publicado Boolean       @default(false)
   createdAt DateTime      @default(now())
   users     User          @relation(fields: [autorId], references: [id])
 
