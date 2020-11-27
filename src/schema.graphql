@@ -4,6 +4,10 @@
 
 scalar DateTime
 
+type Mutation {
+  createOnePost(data: PostCreateInput!): Post!
+}
+
 type Post {
   conteudo: String!
   createdAt: DateTime!
@@ -13,12 +17,63 @@ type Post {
   users: User!
 }
 
+input PostCreateInput {
+  conteudo: String!
+  createdAt: DateTime
+  publicado: Boolean
+  Review: ReviewCreateManyWithoutPostInput
+  titulo: String!
+  users: UserCreateOneWithoutPostsInput!
+}
+
+input PostCreateManyWithoutUsersInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutusersInput!]
+  create: [PostCreateWithoutUsersInput!]
+}
+
+input PostCreateOneWithoutReviewInput {
+  connect: PostWhereUniqueInput
+  connectOrCreate: PostCreateOrConnectWithoutReviewInput
+  create: PostCreateWithoutReviewInput
+}
+
+input PostCreateOrConnectWithoutReviewInput {
+  create: PostCreateWithoutReviewInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostCreateOrConnectWithoutusersInput {
+  create: PostCreateWithoutUsersInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostCreateWithoutReviewInput {
+  conteudo: String!
+  createdAt: DateTime
+  publicado: Boolean
+  titulo: String!
+  users: UserCreateOneWithoutPostsInput!
+}
+
+input PostCreateWithoutUsersInput {
+  conteudo: String!
+  createdAt: DateTime
+  publicado: Boolean
+  Review: ReviewCreateManyWithoutPostInput
+  titulo: String!
+}
+
 input PostWhereUniqueInput {
   id: Int
 }
 
 type Query {
-  users: [User]
+  buscaAutoresPublicados(email: String!): [User]
+  postsAprovados: [Post]
+  reviews(after: ReviewWhereUniqueInput, before: ReviewWhereUniqueInput, first: Int, last: Int): [Review!]!
+  user(where: UserWhereUniqueInput!): User
+  users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
 }
 
 type Review {
@@ -30,10 +85,90 @@ type Review {
   reviewer: User!
 }
 
+input ReviewCreateManyWithoutPostInput {
+  connect: [ReviewWhereUniqueInput!]
+  connectOrCreate: [ReviewCreateOrConnectWithoutpostInput!]
+  create: [ReviewCreateWithoutPostInput!]
+}
+
+input ReviewCreateManyWithoutReviewerInput {
+  connect: [ReviewWhereUniqueInput!]
+  connectOrCreate: [ReviewCreateOrConnectWithoutreviewerInput!]
+  create: [ReviewCreateWithoutReviewerInput!]
+}
+
+input ReviewCreateOrConnectWithoutpostInput {
+  create: ReviewCreateWithoutPostInput!
+  where: ReviewWhereUniqueInput!
+}
+
+input ReviewCreateOrConnectWithoutreviewerInput {
+  create: ReviewCreateWithoutReviewerInput!
+  where: ReviewWhereUniqueInput!
+}
+
+input ReviewCreateWithoutPostInput {
+  aprovado: Boolean
+  createdAt: DateTime
+  nota: Int!
+  reviewer: UserCreateOneWithoutReviewInput!
+}
+
+input ReviewCreateWithoutReviewerInput {
+  aprovado: Boolean
+  createdAt: DateTime
+  nota: Int!
+  post: PostCreateOneWithoutReviewInput!
+}
+
+input ReviewWhereUniqueInput {
+  id: Int
+}
+
 type User {
   createdAt: DateTime!
   email: String!
   id: Int!
   nome: String!
   posts(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int): [Post!]!
+}
+
+input UserCreateOneWithoutPostsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutpostsInput
+  create: UserCreateWithoutPostsInput
+}
+
+input UserCreateOneWithoutReviewInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutReviewInput
+  create: UserCreateWithoutReviewInput
+}
+
+input UserCreateOrConnectWithoutpostsInput {
+  create: UserCreateWithoutPostsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutReviewInput {
+  create: UserCreateWithoutReviewInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateWithoutPostsInput {
+  createdAt: DateTime
+  email: String!
+  nome: String!
+  Review: ReviewCreateManyWithoutReviewerInput
+}
+
+input UserCreateWithoutReviewInput {
+  createdAt: DateTime
+  email: String!
+  nome: String!
+  posts: PostCreateManyWithoutUsersInput
+}
+
+input UserWhereUniqueInput {
+  id: Int
 }

@@ -1,4 +1,4 @@
-const { objectType, queryType, makeSchema } = require('@nexus/schema')
+const { objectType, queryType, mutationType, makeSchema, stringArg, nonNull} = require('@nexus/schema')
 const { nexusPrisma } = require('nexus-plugin-prisma')
 const path = require('path')
 
@@ -22,6 +22,7 @@ const Post = objectType({
    t.model.publicado()
    t.model.users()
    t.model.createdAt()
+
  }
 })
  
@@ -40,18 +41,45 @@ const Review = objectType({
 const Query = queryType({
   name: "Query",
   definition(t) {
-    t.list.field("users", {
-      type: "User",
+    t.crud.users()
+    t.crud.user()
+    t.crud.reviews()
+    t.list.field("postsAprovados", {
+      type: "Post",
       resolve: (_, __, { prisma }) => {
-        return prisma.user.findMany()
+        return prisma.post.findMany({
+          where: { publicado: true },
+          orderBy: {
+            createdAt: 'asc'
+          }
+        })
+      }
+    })
+    t.list.field("buscaAutoresPublicados", {
+      type: "User",
+      args: { email: nonNull(stringArg()) },
+      resolve: (_, args, { prisma }) => {
+        return prisma.user.findMany({
+          where: {
+            email: { contains: args.email },
+            posts: { some: { publicado: true }}
+          }
+        })
       }
     })
   }
 })
 
+const Mutation = mutationType({
+  name: "Mutation",
+  definition(t) {
+    t.crud.createOnePost()
+  }
+})
+
 const schema = makeSchema({
-  types: [Query, Post, User, Review],
-  plugins: [nexusPrisma()],
+  types: [Query, Mutation, Post, User, Review],
+  plugins: [nexusPrisma({ experimentalCRUD: true })],
   outputs: {
     schema: path.join(__dirname, 'schema.graphql'),
     typegen: path.join(__dirname, '../prisma/generated', 'nexus.ts'),
